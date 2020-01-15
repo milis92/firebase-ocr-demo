@@ -1,0 +1,31 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${deps.kotlin}"
+
+    //Dagger
+    implementation "com.google.dagger:dagger:${deps.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${deps.dagger}"
+
+    //Android
+    implementation "androidx.appcompat:appcompat:${deps.appcompat}"
+    implementation "androidx.constraintlayout:constraintlayout:${deps.constraintLayout}"
+    implementation "com.google.android.material:material:${deps.material}"
+    implementation "androidx.core:core-ktx:${deps.coreKtx}"
+    implementation "androidx.paging:paging-runtime:${deps.paging}"
+
+    //Common
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation ("com.github.bumptech.glide:glide:${deps.glide}") {
+        exclude group: "com.android.support"
+    }
+    kapt "com.github.bumptech.glide:compiler:${deps.glide}"
+    implementation "com.github.bumptech.glide:okhttp3-integration:${deps.glide}"
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
+    implementation "com.airbnb.android:lottie:${deps.lottie}"
+}
+

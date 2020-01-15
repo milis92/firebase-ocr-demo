@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Boilerplate</string>
+    <string name="search_files_action_title">Find files</string>
+</resources>

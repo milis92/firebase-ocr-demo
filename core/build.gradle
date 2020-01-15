@@ -1,0 +1,105 @@
+apply plugin: 'com.android.library'
+
+apply from: '../common_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        versionCode versions.versionCode
+        versionName "${versions.versionName}"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    kapt {
+        javacOptions {
+            option("-Adagger.fastInit=enabled")
+            option("-Adagger.formatGeneratedSource=disabled")
+            option("-Aroom.schemaLocation=$projectDir/schemas")
+            option("-Aroom.incremental=true")
+            option("-Aroom.expandProjection=true")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    flavorDimensions "configuration"
+
+    //TODO Update your API base url
+    productFlavors {
+        staging {
+            dimension "configuration"
+            buildConfigField "String", "API_BASE_URL", '"https://users.com"'
+        }
+        production {
+            dimension "configuration"
+            buildConfigField "String", "API_BASE_URL", '"https://users.com"'
+        }
+    }
+}
+
+dependencies {
+    //AndroidX
+    implementation "androidx.security:security-crypto:${deps.crypto}"
+
+    implementation "androidx.room:room-runtime:${deps.room}"
+    kapt "androidx.room:room-compiler:${deps.room}"
+    implementation "androidx.room:room-ktx:${deps.room}"
+    implementation "androidx.room:room-rxjava2:${deps.room}"
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
+    implementation("androidx.work:work-runtime-ktx:${deps.workManager}") {
+        exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
+    implementation("androidx.work:work-rxjava2:${deps.workManager}") {
+        exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
+    implementation("androidx.work:work-gcm:${deps.workManager}") {
+        exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
+
+    //RxJava
+    api "io.reactivex.rxjava2:rxandroid:${deps.rxAndroid}"
+    api "io.reactivex.rxjava2:rxjava:${deps.rxJava}"
+    api "io.reactivex.rxjava2:rxkotlin:${deps.rxKotlin}"
+
+    // Gson
+    implementation "com.google.code.gson:gson:${deps.gson}"
+
+    // OkHttpClient
+    implementation "com.squareup.okhttp3:okhttp:${deps.okhttp}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${deps.okhttp}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${deps.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${deps.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${deps.retrofit}"
+
+    // Assisted inject - using the work until this is fixed https://github.com/square/AssistedInject/issues/81
+    /*  compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:${deps.assisted}"
+    kapt "com.squareup.inject:assisted-inject-processor-dagger2:${deps.assisted}"*/
+    compileOnly 'com.github.davidliu.AssistedInject:assisted-inject-annotations-dagger2:78f23af7'
+    kapt 'com.github.davidliu.AssistedInject:assisted-inject-processor-dagger2:78f23af7'
+}

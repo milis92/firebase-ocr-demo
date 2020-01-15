@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+
+apply from: '../common_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+
+def licenceKeys = new Properties()
+file("../licence_keys.properties").withInputStream { licenceKeys.load(it) }
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId names.applicationId
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        archivesBaseName = 'boilerplate'
+
+        versionCode versions.versionCode
+        versionName "${versions.versionName}"
+
+        resConfig 'en'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            keyAlias System.getenv("STORE_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
+            storeFile file("../keystore/keystore.jks")
+            storePassword System.getenv("STORE_PASSWORD")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    kapt {
+        javacOptions {
+            option("-Adagger.fastInit=enabled")
+            option("-Adagger.formatGeneratedSource=disabled")
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            /*
+            TODO Enable resource shrinking when there is support for dynamic features
+            shrinkResources true
+            */
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    flavorDimensions "configuration"
+
+    productFlavors {
+        staging {
+            dimension "configuration"
+            versionNameSuffix "-${util.gitHash}"
+        }
+        production {
+            dimension "configuration"
+        }
+    }
+
+    dynamicFeatures = [':home']
+
+    play {
+        serviceAccountCredentials = file("../.github/play_service_account.json")
+        defaultToAppBundles = true
+        resolutionStrategy = "auto"
+    }
+}
+
+dependencies {
+    //We want to expose this aar as transitive dependency to all sub-modules
+    api project(":core")
+}

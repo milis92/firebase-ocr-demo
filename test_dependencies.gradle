@@ -1,0 +1,44 @@
+dependencies {
+
+    //Unit test dependencies:
+
+    //Junit
+    testImplementation "junit:junit:${deps.junit}"
+
+    //Mockito
+    testImplementation "org.mockito:mockito-inline:${deps.mockito}"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${deps.kmock}"
+
+    //Assertions
+    testImplementation "com.google.truth:truth:${deps.gTruth}"
+
+    //Android unit
+    testImplementation "androidx.test:core:${deps.androidxTestCore}"
+    testImplementation "androidx.test:runner:${deps.testRules}"
+    testImplementation "android.arch.core:core-testing:${deps.androidxArch}"
+
+    //Core
+    androidTestImplementation "androidx.test:core:${deps.androidxTestCore}"
+
+    androidTestImplementation "androidx.test:core-ktx:${deps.androidxTestCore}"
+    androidTestImplementation "androidx.test.ext:junit:${deps.extJunit}"
+    androidTestImplementation "androidx.test.ext:junit-ktx:${deps.extJunit}"
+    androidTestImplementation "androidx.test:rules:${deps.testRules}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${deps.espresso}", {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    }
+    androidTestImplementation "androidx.test.espresso:espresso-intents:${deps.espresso}"
+
+    //Android arch
+    androidTestImplementation "androidx.arch.core:core-testing:${deps.androidxArch}"
+
+    //Assertions
+    androidTestImplementation "com.google.truth:truth:${deps.gTruth}",  {
+        exclude group: "com.google.guava", module: "guava"
+        exclude group: "com.google.errorprone", module: "error_prone_annotations"
+    }
+
+    //Mockito
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${deps.kmock}"
+    androidTestImplementation "org.mockito:mockito-android:${deps.mockito}"
+}
