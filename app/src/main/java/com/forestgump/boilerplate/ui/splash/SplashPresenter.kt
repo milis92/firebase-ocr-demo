@@ -4,12 +4,12 @@ import com.forestgump.boilerplate.core.common.mvp.MvpPresenter
 import javax.inject.Inject
 
 abstract class SplashPresenter : MvpPresenter<SplashView>() {
-    abstract fun onStarted()
+    abstract fun onCreated()
 }
 
 class SplashPresenterImp @Inject constructor() : SplashPresenter() {
 
-    override fun onStarted() {
+    override fun onCreated() {
        view?.onLaunchHome()
     }
 }

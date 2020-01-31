@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 apply from: '../common_dependencies.gradle'
 apply from: '../test_dependencies.gradle'
 
+apply plugin: 'com.google.gms.google-services'
+
 def licenceKeys = new Properties()
 file("../licence_keys.properties").withInputStream { licenceKeys.load(it) }
 

@@ -10,7 +10,9 @@ import com.forestgump.boilerplate.core.dagger.providers.CoreModule
 import com.forestgump.boilerplate.core.dagger.providers.NewsDomainModule
 import com.forestgump.boilerplate.core.dagger.qualifiers.PlainKv
 import com.forestgump.boilerplate.core.dagger.scopes.ApplicationScope
-import com.forestgump.boilerplate.core.domain.interactors.GetNewsUseCase
+import com.forestgump.boilerplate.core.domain.interactors.GetProcessedDocumentUseCase
+import com.forestgump.boilerplate.core.domain.interactors.GetProcessedDocumentsUseCase
+import com.forestgump.boilerplate.core.domain.interactors.ProcessImageUseCase
 import dagger.BindsInstance
 import dagger.Component
 
@@ -35,7 +37,11 @@ abstract class CoreComponent : BaseComponent<Application> {
     @PlainKv
     abstract fun sharedPreferences(): SharedPreferences
 
-    abstract fun getUserUseCase(): GetNewsUseCase
+    abstract fun processImageUseCase(): ProcessImageUseCase
+
+    abstract fun getProcessedDocumentsUseCase() : GetProcessedDocumentsUseCase
+
+    abstract fun getProcessedDocumentUseCase() : GetProcessedDocumentUseCase
 
     @Component.Factory
     interface Factory {

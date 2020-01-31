@@ -1,5 +1,4 @@
-buildscript { 
-    ext.kotlin_version = '1.3.61'
+buildscript {
 
     ext.versions = [
             'compileSdk' : 28,
@@ -49,7 +48,10 @@ buildscript {
             'extJunit'           : '1.1.0',
             'testRules'          : '1.1.0-beta02',
             'gTruth'             : '1.0',
-            'permissions'        : '3.0.0'
+            'permissions'        : '3.0.0',
+            'googleServices'     : '4.3.3',
+            'firebaseMlVision'   : '24.0.1',
+            'navigationX'        : '2.1.0'
     ]
 
     ext.names = [
@@ -77,6 +79,7 @@ buildscript {
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:${deps.dokka}"
         classpath "org.jlleitschuh.gradle:ktlint-gradle:${deps.ktLint}"
         classpath "com.github.triplet.gradle:play-publisher:${deps.publisher}"
+        classpath "com.google.gms:google-services:${deps.googleServices}"
     }
 }
 

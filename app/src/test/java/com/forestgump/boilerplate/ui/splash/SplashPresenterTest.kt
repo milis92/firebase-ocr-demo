@@ -21,7 +21,7 @@ class SplashPresenterTest {
 
     @Test
     fun verifyCredentialsLaunchesHome() {
-        presenter.onStarted()
+        presenter.onCreated()
 
         verify(view, times(1)).onLaunchHome()
         verifyNoMoreInteractions(view)

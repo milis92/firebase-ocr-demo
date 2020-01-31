@@ -43,4 +43,7 @@ android {
 
 dependencies {
     implementation project(':app')
+
+    implementation "androidx.navigation:navigation-fragment-ktx:${deps.navigationX}"
+    implementation "androidx.navigation:navigation-ui-ktx:${deps.navigationX}"
 }

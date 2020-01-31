@@ -27,5 +27,7 @@ dependencies {
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
     implementation "com.airbnb.android:lottie:${deps.lottie}"
+    implementation "pub.devrel:easypermissions:${deps.permissions}"
+
 }
 

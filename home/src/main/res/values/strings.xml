@@ -1,3 +1,9 @@
 <resources>
 
+    <string name="camera_rationale">OCR needs your permission to access camera on this device</string>
+    <string name="rationale_ask_ok">Give permission</string>
+    <string name="rationale_ask_cancel">Not this time</string>
+    <string name="file_picker_select_with">Select using</string>
+    <string name="drawer_open" translatable="false">Open</string>
+    <string name="drawer_close" translatable="false">Close</string>
 </resources>
